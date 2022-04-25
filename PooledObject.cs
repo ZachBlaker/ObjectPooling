@@ -20,7 +20,9 @@ namespace Gameplay.ObjectPooling
 
         void OnDisable()
         {
-            Invoke("InvokeDisableAction",0);
+            //Delayed a frame to avoid errors that occur 
+            //when the disableAction moves the transform in the same frame the object is disabled
+            Invoke("InvokeDisableAction" , 0);  
         }
         void OnDestroy()
         {
