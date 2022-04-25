@@ -12,7 +12,7 @@ namespace Gameplay.ObjectPooling
 
         GameObject parent;
         List<T> pooledObjects;
-        List<T> avaliableObjects;
+        List<T> availableObjects;
 
 
         public ObjectPool(T prefab, string name = "")
@@ -42,10 +42,10 @@ namespace Gameplay.ObjectPooling
 
         public T GetObject()
         {
-            if (avaliableObjects.Count == 0)
+            if (availableObjects.Count == 0)
                 CreateObjectIntoPool();
 
-            T obj = avaliableObjects[0];
+            T obj = availableObjects[0];
             avaliableObjects.RemoveAt(0);
             return obj;
         }
@@ -69,15 +69,15 @@ namespace Gameplay.ObjectPooling
 
         public void ReturnObjectToPool(T obj)
         {
-            if (parent == null)
-                return;
             obj.transform.parent = parent.transform;
-            avaliableObjects.Add(obj);
+            availableObjects.Add(obj);
         }
 
 
         public void MarkPoolForDeletion()
         {
+            //Not implemented currently
+            return;
             List<T> oldObjs = new List<T>(pooledObjects);
             //StartCoroutine(ClearPooledList(oldObjs));
 
@@ -89,8 +89,8 @@ namespace Gameplay.ObjectPooling
         {
             if (pooledObjects.Contains(obj))
                 pooledObjects.Remove(obj);
-            if (avaliableObjects.Contains(obj))
-                avaliableObjects.Remove(obj);
+            if (availableObjects.Contains(obj))
+                availableObjects.Remove(obj);
         }
 
     }
