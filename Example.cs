@@ -1,3 +1,6 @@
+using Gameplay.ObjectPooling;
+using UnityEngine;
+
 public class Weapon
 {
     Projectile projectilePrefab;
